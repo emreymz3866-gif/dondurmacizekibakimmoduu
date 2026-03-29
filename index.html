@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dondurmacı Zeki Karaköprü resmi web sitesi bakım modundadır. Çok yakında yenilenmiş haliyle yeniden yayında.">
+    <title>Dondurmacı Zeki Karaköprü | Bakım Modu</title>
+    <style>
+        :root {
+            --cream: #fff4e3;
+            --gold: #f2c27b;
+            --amber: #d88a37;
+            --berry: #b13a4f;
+            --ink: #1f130c;
+            --soft: rgba(255, 244, 227, 0.88);
+            --line: rgba(255, 255, 255, 0.16);
+            --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(17, 9, 4, 0.72), rgba(17, 9, 4, 0.72)),
+                radial-gradient(circle at center, rgba(216, 138, 55, 0.18), transparent 40%),
+                url("https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .hero {
+            width: min(100%, 920px);
+            min-height: calc(100vh - 48px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .panel {
+            width: min(100%, 700px);
+            padding: 40px 32px;
+            text-align: center;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: rgba(22, 12, 7, 0.34);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: var(--cream);
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 18px 0 14px;
+            font-size: clamp(2.6rem, 6vw, 5.2rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            color: #fff9ef;
+        }
+
+        .subtitle {
+            margin: 0 auto 20px;
+            max-width: 620px;
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: rgba(255, 247, 236, 0.9);
+        }
+
+        .slogan {
+            margin: 0 auto 24px;
+            max-width: 640px;
+            font-size: 1.08rem;
+            line-height: 1.9;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .slogan span {
+            color: #fff;
+        }
+
+        .meta {
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 0 28px;
+        }
+
+        .pill {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: rgba(255, 248, 236, 0.88);
+            font-size: 0.92rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 220px;
+            padding: 15px 20px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #c03f59, #a72a45);
+            color: #fff;
+            box-shadow: 0 14px 32px rgba(167, 42, 69, 0.34);
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #fff7eb;
+        }
+
+        .footer {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            color: rgba(255, 247, 236, 0.72);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 16px;
+            }
+
+            .hero {
+                min-height: calc(100vh - 32px);
+            }
+
+            .panel {
+                padding: 28px 20px;
+                border-radius: 22px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle,
+            .slogan {
+                font-size: 1rem;
+            }
+
+            .button {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="hero">
+        <section class="panel">
+            <div class="badge">Bakım Modu</div>
+            <h1>Dondurmacı Zeki<br>Karaköprü</h1>
+            <p class="subtitle">
+                Web sitemizi daha güçlü, daha hızlı ve markamıza daha yakışan bir deneyim için kısa süreliğine bakıma aldık.
+                Çok yakında yenilenmiş haliyle yeniden yayında olacağız.
+            </p>
+            <p class="slogan">
+                Nereden geliyorsun? <span>DONDURMACI ZEKİ</span>'den.
+                Nereye gidiyorsun? <span>DONDURMACI ZEKİ</span>'ye.
+            </p>
+
+            <div class="meta">
+                <div class="pill">Karaköprü / Şanlıurfa</div>
+                <div class="pill">Dondurma ve Tatlı Deneyimi</div>
+                <div class="pill">Yakında Yeniden Buradayız</div>
+            </div>
+
+            <div class="actions">
+                <a class="button button-primary" href="https://www.instagram.com/dondurmacizekikarakoprusubesi/" target="_blank" rel="noopener noreferrer">
+                    Instagram'a Git
+                </a>
+                <a class="button button-secondary" href="https://maps.app.goo.gl/JrVbNjfNf3wozTHL7" target="_blank" rel="noopener noreferrer">
+                    Konumu Aç
+                </a>
+            </div>
+
+            <div class="footer">© 2026 Dondurmacı Zeki. Tüm hakları saklıdır.</div>
+        </section>
+    </main>
+</body>
+</html>
