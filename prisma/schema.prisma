@@ -1,0 +1,171 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  BRANCH_ADMIN
+  EDITOR
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         AdminRole @default(SUPER_ADMIN)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Branch {
+  id            String           @id @default(cuid())
+  name          String
+  slug          String           @unique
+  shortAddress  String
+  fullAddress   String
+  mapUrl        String
+  phone         String
+  serviceNote   String
+  isActive      Boolean          @default(true)
+  sortOrder     Int              @default(0)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  branchMenus   BranchMenu[]
+  homeCard      HomeBranchCard?
+  qrDesigns     QrDesign[]
+
+  @@index([sortOrder])
+}
+
+model Menu {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  description String?
+  coverImageUrl String     @default("")
+  isActive    Boolean      @default(true)
+  sortOrder   Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  branchMenus BranchMenu[]
+  categories  Category[]
+  qrDesigns   QrDesign[]
+
+  @@index([sortOrder])
+}
+
+model BranchMenu {
+  id        String   @id @default(cuid())
+  branchId  String
+  menuId    String
+  isDefault Boolean  @default(false)
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  branch    Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  menu      Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
+
+  @@unique([branchId, menuId])
+  @@index([branchId, sortOrder])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  menuId       String
+  name        String
+  slug        String
+  description String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  menu        Menu      @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  products    Product[]
+
+  @@unique([menuId, slug])
+  @@index([menuId, sortOrder])
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  categoryId  String
+  name        String
+  slug        String
+  description String?
+  price       Decimal   @db.Decimal(10, 2)
+  imageUrl    String
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, slug])
+  @@index([categoryId, sortOrder])
+}
+
+model SiteSetting {
+  id                 String   @id @default(cuid())
+  siteName           String
+  slogan             String
+  description        String
+  logoUrl            String
+  backgroundImageUrl String
+  menuButtonText     String
+  phone              String?
+  instagramUrl       String?
+  tiktokUrl          String?
+  whatsappUrl        String?
+  primaryColor       String?
+  secondaryColor     String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model HomeBranchCard {
+  id           String   @id @default(cuid())
+  branchId      String   @unique
+  title        String
+  shortAddress String
+  mapUrl       String
+  sortOrder    Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  branch       Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@index([sortOrder])
+}
+
+model QrDesign {
+  id                String   @id @default(cuid())
+  branchId          String
+  menuId            String
+  title             String
+  subtitle          String?
+  generatedUrl      String
+  logoUrl           String?
+  showLogo          Boolean  @default(true)
+  showIcon          Boolean  @default(true)
+  backgroundColor   String
+  qrBackgroundColor String
+  textColor         String
+  accentColor       String
+  frameThickness    Int      @default(2)
+  cornerRadius      Int      @default(16)
+  templateKey       String
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  branch            Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  menu              Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
+
+  @@unique([branchId, menuId])
+}
